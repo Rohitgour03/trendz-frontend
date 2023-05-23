@@ -1,7 +1,6 @@
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import ProductList from "@/components/ProductListSection/ProductListSection";
-import { FiltersCompo } from "@/components/FiltersCompo/FiltersCompo";
 import axios from "axios";
 import { Wrapper } from "@/components/Wrapper";
 
@@ -13,18 +12,15 @@ export async function getStaticPaths() {
         }
     })
    
-    const paths = res.data?.data?.map((pdt) => {
-        return {
-            params: { slug: String(pdt.attributes.subcategory.data.attributes.title) }
-        } 
-    })
+    const paths = res?.data?.data?.map((pdt) => ({
+            params: { slug: String(pdt.attributes.subcategory.data.attributes.title) },
+    }));
     // { fallback: false } means other routes should 404
     return { paths, fallback: false };
 }
 
 export async function getStaticProps(context){
     const slug = context.params.slug
-    console.log(slug)
     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}}/products?filters[subcategory][title][$eq]=${slug}&populate=*`, 
         {
             headers: {
@@ -33,7 +29,7 @@ export async function getStaticProps(context){
         }
     )
 
-    const data = res.data.data
+    const data = res?.data?.data
     return {
         props: {
             data,
