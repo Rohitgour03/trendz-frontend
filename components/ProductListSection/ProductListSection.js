@@ -1,8 +1,6 @@
 import Product from "../Product/Product"
-import { useSelector } from "react-redux"
 
 export default function ProductList(props){
-    const filteredData = useSelector(state => state.filters.filterOptions)
     const productList = props.data.map(item => {
         const url = item.attributes.img.data.attributes.url
         return (

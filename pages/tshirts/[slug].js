@@ -21,8 +21,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context){
     const slug = context.params.slug
-    console.log("THe slug is: ", slug)
-
     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?filters[subcategories][title][$eq]=${slug}&populate=*`,
         {
             headers: {
@@ -31,8 +29,7 @@ export async function getStaticProps(context){
         }
     )
 
-    const data = res.data?.data
-    console.log(data)
+    const data = res?.data?.data
     return {
         props: {
             data,
@@ -41,6 +38,7 @@ export async function getStaticProps(context){
 }
 
 export default function Products({data}){
+    console.log(data)
     return (
         <Wrapper> 
             <Navbar/>
