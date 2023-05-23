@@ -6,100 +6,88 @@ import axios from 'axios'
 import { Wrapper } from '@/components/Wrapper'
 
 export async function getServerSideProps(context){
+
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&populate=*`, {
+        headers: {
+            Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}` 
+        }
+    })
     
-    let filtPdtData, filter = context.params.filter;
-    switch(filter){
-        case 'under 499':
-            const res1 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[price][$lte]=499&populate=*`, {
-                headers: {
-                    Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}` 
-                }
-            })
-            filtPdtData = res1.data.data
-            break;
-
-        case 'under 999':
-            const res2 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[price][$lte]=999&populate=*`, {
-                headers: {
-                    Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}` 
-                }
-            })
-            filtPdtData = res2.data.data
-            break;
-
-        case 'under 1499':
-            const res3 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[price][$lte]=1499&populate=*`, {
-                headers: {
-                    Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}` 
-                }
-            })
-            filtPdtData = res3.data.data
-            break;
-
-        case 'FullSleeves':
-            const res4 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isFullsleeves][$eq]=true&populate=*`, {
-                headers: {
-                    Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
-                }
-            })
-            filtPdtData = res4.data.data
-            break;
-
-        case 'Halfsleeves':
-            const res5 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isHalfsleeves][$eq]=true&populate=*`, {
-                headers: {
-                    Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
-                }
-            })
-            filtPdtData = res5.data.data
-            break;
-
-        case 'sleeveless':
-            const res6 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isSleeveless][$eq]=true&populate=*`, {
-                headers: {
-                    Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
-                }
-            })
-            filtPdtData = res6.data.data
-            break;
-
-        case 'Printed':
-            const res7 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isPrinted][$eq]=true&populate=*`, {
-                headers: {
-                    Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
-                }
-            })
-            filtPdtData = res7.data.data
-            break;
-
-        case 'Solid':
-            const res8 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isSolid][$eq]=true&populate=*`, {
-                headers: {
-                    Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
-                }
-            })
-            filtPdtData = res8.data.data
-            break;
-
-        case 'oversized':
-            const res9 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isOversized][$eq]=true&populate=*`, {
-                headers: {
-                    Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
-                }
-            })
-            filtPdtData = res9.data.data
-            break;
-
-        case 'fit':
-            const res10 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isFit][$eq]=true&populate=*`, {
-                headers: {
-                    Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
-                }
-            })
-            filtPdtData = res10.data.data
-            break;
+    let filtPdtData = res.data.data, filter = context.params.filter;
+    if(filter === 'under 499'){
+        const res1 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[price][$lte]=499&populate=*`, {
+            headers: {
+                Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}` 
+            }
+        })
+        filtPdtData = res1?.data?.data
+    } else if(filter === 'under 999'){
+        const res2 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[price][$lte]=999&populate=*`, {
+            headers: {
+                Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}` 
+            }
+        })
+        filtPdtData = res2?.data?.data
+    } else if(filter === 'under 1499'){
+        const res3 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[price][$lte]=1499&populate=*`, {
+            headers: {
+                Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}` 
+            }
+        })
+        filtPdtData = res3?.data?.data
+    } else if(filter === 'fullsleeve'){
+        const res4 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isFullsleeve][$eq]=true&populate=*`, {
+            headers: {
+                Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
+            }
+        })
+        filtPdtData = res4.data.data
+    } else if(filter === 'halfsleeve'){
+        const res5 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isHalfsleeve][$eq]=true&populate=*`, {
+            headers: {
+                Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
+            }
+        })
+        console.log("I am response: ", res5.data.data)
+        filtPdtData = res5?.data?.data
+    } else if(filter === 'sleeveless'){
+        const res6 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isSleeveless][$eq]=true&populate=*`, {
+            headers: {
+                Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
+            }
+        })
+        filtPdtData = res6?.data?.data
+    } else if(filter === 'printed'){
+        const res7 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isPrinted][$eq]=true&populate=*`, {
+            headers: {
+                Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
+            }
+        })
+        filtPdtData = res7?.data?.data
+    } else if(filter === 'solid'){
+        const res8 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isSolid][$eq]=true&populate=*`, {
+            headers: {
+                Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
+            }
+        })
+        filtPdtData = res8?.data?.data
+    } else if(filter === 'oversize'){
+        const res9 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isOversize][$eq]=true&populate=*`, {
+            headers: {
+                Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
+            }
+        })
+        filtPdtData = res9?.data?.data
+    } else if(filter === 'fit'){
+        const res10 = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/products?filters[category][title][$eq]=men&filters[isFit][$eq]=true&populate=*`, {
+            headers: {
+                Authorization: `bearer  ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
+            }
+        })
+        filtPdtData = res10?.data?.data
     }
 
+    console.log("Now i am the filterData", filtPdtData)
     return {
         props: {
             filter,

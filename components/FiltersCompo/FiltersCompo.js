@@ -53,7 +53,7 @@ export function Compo({category, categoryTitle, categoryContent}){
             <div 
                 key={value}
                 className="mb-2 ml-4">
-                <Link href={`/${category}/${value}`} >
+                <Link href={`/${category}/${value.toLowerCase()}`} >
                     {value}
                 </Link>
             </div>
@@ -91,7 +91,7 @@ export function FiltersCompo(props){
                     <Compo
                         category={props.category}
                         categoryTitle="Sleeve"
-                        categoryContent={['FullSleeves', 'Halfsleeves', 'sleeveless']} />
+                        categoryContent={['FullSleeve', 'Halfsleeve', 'sleeveless']} />
                     <Compo 
                         category={props.category}
                         categoryTitle="Design" 
@@ -99,7 +99,7 @@ export function FiltersCompo(props){
                     <Compo 
                         category={props.category}
                         categoryTitle="Fit" 
-                        categoryContent={['oversized', 'fit']} />
+                        categoryContent={['oversize', 'fit']} />
                 </div>
             </div>
         </aside>

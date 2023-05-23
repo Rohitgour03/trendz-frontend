@@ -6,14 +6,14 @@ import { Wrapper } from "@/components/Wrapper";
 
 
 export async function getStaticPaths() {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?populate=*`, {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/subcategories`, {
         headers: {
             Authorization: `bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
         }
     })
-   
+
     const paths = res?.data?.data?.map((pdt) => ({
-            params: { slug: String(pdt.attributes.subcategory.data.attributes.title) },
+            params: { slug: String(pdt.attributes.title) },
     }));
     // { fallback: false } means other routes should 404
     return { paths, fallback: false };
@@ -21,7 +21,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context){
     const slug = context.params.slug
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}}/products?filters[subcategory][title][$eq]=${slug}&populate=*`, 
+    console.log("THe slug is: ", slug)
+
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?filters[subcategories][title][$eq]=${slug}&populate=*`,
         {
             headers: {
                 Authorization: `bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
@@ -29,7 +31,8 @@ export async function getStaticProps(context){
         }
     )
 
-    const data = res?.data?.data
+    const data = res.data?.data
+    console.log(data)
     return {
         props: {
             data,

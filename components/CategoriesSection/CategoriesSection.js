@@ -10,7 +10,7 @@ const categoryTshirtData = [
     {
         key: 2,
         imgSrc: '/FullSleeve1.webp',
-        category: 'FullSleeves'
+        category: 'FullSleeve'
     },
     {
         key: 3,
