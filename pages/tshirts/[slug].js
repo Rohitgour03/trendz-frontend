@@ -13,8 +13,7 @@ export async function getStaticPaths() {
         }
     })
    
-    const pdts = res.data.data
-    const paths = pdts.map((pdt) => {
+    const paths = res.data?.data?.map((pdt) => {
         return {
             params: { slug: String(pdt.attributes.subcategory.data.attributes.title) }
         } 

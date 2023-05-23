@@ -11,9 +11,8 @@ export async function getStaticPaths() {
             Authorization: `bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
         }
     })
-   
-    const pdts = res.data.data
-    const paths = pdts.map((pdt) => ({
+    
+    const paths = res.data?.data?.map((pdt) => ({
       params: { id: String(pdt.id) },
     }));
 
