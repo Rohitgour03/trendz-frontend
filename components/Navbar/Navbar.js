@@ -4,9 +4,13 @@ import Button from '../Button/Button'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { BiMenuAltRight } from "react-icons/bi";
+import { VscChromeClose } from "react-icons/vsc";
+import MobileMenu from './MobileMenu'
 
 export default function Navbar(){
 
+    const [mobileMenu, setMobileMenu] = useState(false)
     const [show, setShow] = useState('translate-y-0')
     const [lastScrollY, setLastScrollY] = useState(0)
 
@@ -50,10 +54,11 @@ export default function Navbar(){
 
     return (
         <header className={`w-full z-10 bg-white border-b-2 sticky top-0 transition-transform duration-300 ${show}`}>
-            <nav className='flex gap-12 my-2 text-black py-4'> 
-                
+            {mobileMenu && <MobileMenu setMobileMenu={setMobileMenu} />} 
+            <nav className='flex gap-12 my-2 text-black py-4'>   
                 <Link href="/" className='font-bold text-2xl self-center'>Trendz🔥</Link>
-                <ul className='flex justify-between items-center gap-8'>
+
+                <ul className='hidden md:flex justify-between items-center gap-8'>
                     <li><Link href="/newArrivals">New Arrivals</Link></li>
                     <li><Link href="/men">Men</Link></li>
                     <li><Link href="/women">Women</Link></li>
@@ -89,6 +94,22 @@ export default function Navbar(){
                     {/* <li>
                         {loginStatusCompo}
                     </li> */}
+
+                     {/* Mobile icon start */}
+                        <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex md:hidden justify-center items-center hover:bg-black/[0.05] cursor-pointer relative -mr-2">
+                            {mobileMenu ? (
+                                <VscChromeClose
+                                    className="text-[16px]"
+                                    onClick={() => setMobileMenu(false)}
+                                />
+                            ) : (
+                                <BiMenuAltRight
+                                    className="text-[20px]"
+                                    onClick={() => setMobileMenu(true)}
+                                />
+                            )}
+                        </div>
+                    {/* Mobile icon end */}
                 </ul>
             </nav>
         </header>
