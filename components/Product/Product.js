@@ -15,7 +15,7 @@ export default function Product(props){
                             className='w-full h-full object-cover hover:opacity-75 hover:scale-[1.02] transition-all'
                         />
                     </div>
-                    <p>{props.title}</p>
+                    <p className='truncate'>{props.title}</p>
                     <div className='flex items-center gap-4'>
                         <div className='text-xl font-bold'>₹{props.price}</div>
                         <div className='text-sm line-through text-slate-400'>₹{props.oldPrice}</div>
