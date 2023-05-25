@@ -55,7 +55,7 @@ export default function Navbar(){
     return (
         <header className={`w-full z-10 bg-white border-b-2 sticky top-0 transition-transform duration-300 ${show}`}>
             {mobileMenu && <MobileMenu setMobileMenu={setMobileMenu} />} 
-            <nav className='flex gap-12 my-2 text-black py-4'>   
+            <nav className='flex gap-12  sm:my-2 text-black py-4'>   
                 <Link href="/" className='font-bold text-2xl self-center'>Trendz🔥</Link>
 
                 <ul className='hidden md:flex justify-between items-center gap-8'>
