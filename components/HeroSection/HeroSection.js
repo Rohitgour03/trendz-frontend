@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { motion } from "framer-motion"
 import { BsArrowRight } from 'react-icons/bs'
 
 export default function Hero(props) {
@@ -14,7 +15,16 @@ export default function Hero(props) {
             </Link> */}
 
             <h1 className='text-4xl leading-snug font-extrabold mb-6 md:mb-8 sm:text-5xl sm:leading-tight md:text-6xl md:leading-tight xl:text-7xl xl:leading-tight'>
-                Elevate your style with our exclusive Tshirt collection
+                <motion.div 
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    transition={{duration: 1.6, ease: [0.6, 0.01, 0.05, 0.95]}}
+                    className='overflow-hidden inline-block xl:block'>Elevate your style with our </motion.div>
+                <motion.div 
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    transition={{duration: 1.6, ease: [0.6, 0.01, 0.05, 0.95]}}
+                    className='overflow-hidden inline-block xl:block'>exclusive Tshirt collection</motion.div> 
             </h1>
             <Link href="" className='flex items-center gap-2 w-fit bg-[#ff4141] py-2 px-4 rounded text-base font-medium sm:mx-auto md:text-lg md:py-3 md:px-8'>
                 Shop Now

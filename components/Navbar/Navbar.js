@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { BiMenuAltRight } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 import MobileMenu from './MobileMenu'
+import { easeIn, easeInOut, easeOut, motion } from "framer-motion"
 
 export default function Navbar(){
 
@@ -53,7 +54,15 @@ export default function Navbar(){
     // }
 
     return (
-        <header className={`w-full z-10 bg-white border-b-[1px] border-zinc-800 sticky top-0 transition-transform duration-300 ${show}`}>
+        <motion.header 
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{
+                ease: easeOut,
+                duration: 1, 
+                delay: 0.8
+            }}
+            className={`w-full z-10 bg-white border-b-[1px] border-zinc-800 sticky top-0 transition-transform duration-300 ${show}`}>
             {mobileMenu && <MobileMenu setMobileMenu={setMobileMenu} />} 
             <nav className='flex gap-12  sm:my-2 md:mt-6 text-black py-4'>   
                 <Link href="/" className='font-bold text-2xl self-center'>Trendz🔥</Link>
@@ -112,6 +121,6 @@ export default function Navbar(){
                     {/* Mobile icon end */}
                 </ul>
             </nav>
-        </header>
+        </motion.header>
     )
 }
