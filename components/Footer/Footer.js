@@ -2,8 +2,8 @@ import Image from 'next/image'
 
 export default function Footer() {
     return (
-        <footer className='w-full bg-white text-black border-t-2'>
-            <div className='flex flex-col md:flex-row justify-between pt-4 pb-16'>
+        <footer className='w-full bg-white text-black border-t-[1px] border-zinc-900'>
+            <div className='flex flex-col md:flex-row justify-between pt-12 pb-16'>
                 <div className='my-4'>
                     <p className='text-xl font-bold mb-4'>Trendz 🔥</p>
                     <p className='text-slate-300'>@copyright trendz</p>
