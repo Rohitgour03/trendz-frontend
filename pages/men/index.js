@@ -32,6 +32,7 @@ export default function men({data}){
                         heading="Hello Men 👋" 
                         subheading="Browse the latest and trendy Tshirts for your unique style"
                         data={data}
+                        category='men'
                     />
                 </section>
             </main> 

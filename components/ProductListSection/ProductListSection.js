@@ -1,4 +1,5 @@
 import Product from "../Product/Product"
+import Image from "next/image"
 
 export default function ProductList(props){
     const productList = props.data.map(item => {
@@ -18,6 +19,13 @@ export default function ProductList(props){
 
     return (
         <div className="my-8">
+            {
+                props.category == 'men' &&
+                <div className="w-full h-[300px] mb-8">
+                    <Image src="/Hero.png" alt="" width={600} height={300} className="w-full h-full object-cover" />
+                </div>
+            }
+            
             <div className='text-3xl font-extrabold pl-4 sm:pl-0'>{props.heading}</div>
             <div className="pl-4 sm:pl-0">{props.subheading}</div>
             {
