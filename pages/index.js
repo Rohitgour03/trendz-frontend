@@ -44,11 +44,8 @@ export default function Home({data}) {
     <main className={`${inter.className}`}>
       <Wrapper>
         <Navbar />
-      </Wrapper>
-
-      <HeroSection />
-
-      <Wrapper>
+        <HeroSection />
+      
         <section>
             <div className='flex flex-col sm:flex-row gap-8 sm:gap-16 justify-center items-center my-12 sm:my-16 md:my-24 lg:my-36'>
               <div>
